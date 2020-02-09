@@ -1,6 +1,8 @@
 import math
+
 import agent
 import tree
+
 
 ###########################
 # Alpha-Beta Search Agent #
@@ -20,7 +22,7 @@ class AlphaBetaAgent(agent.Agent):
 
     # Builds the tree representing possible moves to x level
     #
-    # PARAM [Board] board: the board at the root node from ehich to build tree
+    # PARAM [Board] board: the board at the root node from which to build tree
     # PARAM [int]   level: the level to which to build the tree
     #   (1 level is 1 player's move)
     def build_tree(self, node, level):
@@ -37,9 +39,9 @@ class AlphaBetaAgent(agent.Agent):
         for i, c in enumerate(children):
             children[i] = tree.Tree(c[0], c[1])
 
-        for i in range(len(children)): 
+        for i in range(len(children)):
             self.build_tree(children[i], level - 1)
-    
+
         node.children = children
         return node
 
@@ -59,38 +61,13 @@ class AlphaBetaAgent(agent.Agent):
         #   neither for testing purposes
         # alpha-beta search the completed tree
 
-
-
         # Create the initial tree down to some level
         level = 8
         root = tree.Tree(brd, None)
         self.build_tree(root, level)
-        
 
         # alpha-beta pruning on tree
         root.a, root.b = -math.inf, math.inf
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     # Get the successors of the given board.
     #
@@ -114,5 +91,5 @@ class AlphaBetaAgent(agent.Agent):
             # (This internally changes nb.player, check the method definition!)
             nb.add_token(col)
             # Add board to list of successors
-            succ.append((nb,col))
+            succ.append((nb, col))
         return succ

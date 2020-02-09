@@ -1,10 +1,9 @@
-import board
 import random
+
 
 #####################
 # Agent definitions #
 #####################
-
 
 
 ##################
@@ -33,7 +32,6 @@ class Agent(object):
         raise NotImplementedError("Please implement this method")
 
 
-
 ##########################
 # Randomly playing agent #
 ##########################
@@ -47,7 +45,6 @@ class RandomAgent(Agent):
     # RETURN [int]: the column where the token must be added
     def go(self, brd):
         return random.choice(brd.free_cols())
-
 
 
 #####################
