@@ -33,7 +33,8 @@ class AlphaBetaAgent(agent.Agent):
         # or just give winning states very high heuristics
         # so they are always chosen regardless of children states
 
-        if level == 0: return node
+        if level == 0:
+            return node
 
         children = self.get_successors(node.board)
         for i, c in enumerate(children):
