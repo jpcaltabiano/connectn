@@ -69,7 +69,7 @@ class AlphaBetaAgent(agent.Agent):
         self.build_tree(root, level)
 
         # alpha-beta pruning on tree
-        
+        print(f"score: {alpha_beta.alpha_beta(root, level, is_max=True, alpha=-math.inf, beta=math.inf)}")
 
     # Get the successors of the given board.
     #
