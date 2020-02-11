@@ -3,8 +3,7 @@ import math
 
 def alpha_beta(node, level: int, is_max: bool, alpha: float, beta: float):
     if node.children is None:
-        # Call H on this node
-        pass
+        return node.board.get_outcome()
 
     if is_max:
         best = -math.inf

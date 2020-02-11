@@ -2,6 +2,7 @@ import math
 
 import agent
 import tree
+import alpha_beta
 
 
 ###########################
@@ -63,12 +64,12 @@ class AlphaBetaAgent(agent.Agent):
         # alpha-beta search the completed tree
 
         # Create the initial tree down to some level
-        level = 8
+        level = 5
         root = tree.Tree(brd, None)
         self.build_tree(root, level)
 
         # alpha-beta pruning on tree
-        root.a, root.b = -math.inf, math.inf
+        
 
     # Get the successors of the given board.
     #
