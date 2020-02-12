@@ -1,9 +1,7 @@
-import math
 import time
 import agent
-import tree
-import alpha_beta
 import heuristics
+from node import Node, alpha_beta
 
 
 ###########################
@@ -40,7 +38,7 @@ class AlphaBetaAgent(agent.Agent):
 
         children = self.get_successors(node.board)
         for i, c in enumerate(children):
-            children[i] = tree.Tree(c[0], c[1])
+            children[i] = Node(c[0], c[1])
 
         for i in range(len(children)):
             self.build_tree(children[i], level - 1)
@@ -68,16 +66,16 @@ class AlphaBetaAgent(agent.Agent):
 
         start = time.time()
         level = 5
-        root = tree.Tree(brd, None)
+        root = Node(brd, None)
         self.build_tree(root, level)
 
-        # alpha-beta pruning on tree
+        score = alpha_beta(root)
+
         print(heuristics.line_map(brd))
-        score = alpha_beta.alpha_beta(root, level, is_max=True, alpha=-math.inf, beta=math.inf)
         end = time.time()
         print(f"score: {score}, time for move: {end-start}")
 
-        return score[1]
+        # return score[1]
 
     # Get the successors of the given board.
     #
