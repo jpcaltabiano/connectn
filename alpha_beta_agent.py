@@ -3,6 +3,7 @@ import math
 import agent
 import tree
 import alpha_beta
+import heuristics
 
 
 ###########################
@@ -69,7 +70,7 @@ class AlphaBetaAgent(agent.Agent):
         self.build_tree(root, level)
 
         # alpha-beta pruning on tree
-        
+        print(heuristics.line_map(brd))
 
     # Get the successors of the given board.
     #
