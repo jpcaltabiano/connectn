@@ -1,5 +1,5 @@
 import math
-
+import time
 import agent
 import tree
 import alpha_beta
@@ -65,12 +65,19 @@ class AlphaBetaAgent(agent.Agent):
         # alpha-beta search the completed tree
 
         # Create the initial tree down to some level
+
+        start = time.time()
         level = 5
         root = tree.Tree(brd, None)
         self.build_tree(root, level)
 
         # alpha-beta pruning on tree
         print(heuristics.line_map(brd))
+        score = alpha_beta.alpha_beta(root, level, is_max=True, alpha=-math.inf, beta=math.inf)
+        end = time.time()
+        print(f"score: {score}, time for move: {end-start}")
+
+        return score[1]
 
     # Get the successors of the given board.
     #

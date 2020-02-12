@@ -33,6 +33,7 @@ good = ours * ours * (good_factor / ((n - 1) / n))
 
 print(f"{danger}\t{good}")
 
+
 def evaluate_board(board: Board) -> float:
     for x in board.w:
         for y in board.h:
