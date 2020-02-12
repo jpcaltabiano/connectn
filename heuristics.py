@@ -43,17 +43,17 @@ def line_map(board):
     lines = []
     for i in range(board.h):
         for j in range(board.w - board.n + 1):
-            lines.push(((i, j),(1, 0)))
+            lines.append(((i, j),(1, 0)))
 
     for i in range(board.w):
         for j in range(board.h - board.n + 1):
-            lines.push(((i, j),(0, 1)))
+            lines.append(((i, j),(0, 1)))
 
     for i in range(board.h - board.n + 1):
         for j in range(board.w - board.n + 1):
-            lines.push(((i, j),(1, 1)))
+            lines.append(((i, j),(1, 1)))
 
     for i in range(board.h - board.n + 1):
-        for j in range((board.w-1)..(board.n-1)):
-            lines.push(((i, j),(-1, -1)))
+        for j in range((board.w-1), (board.n-1)):
+            lines.append(((i, j),(-1, -1)))
     return lines
