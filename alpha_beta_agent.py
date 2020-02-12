@@ -1,4 +1,3 @@
-import time
 import agent
 import heuristics
 from node import Node, alpha_beta
@@ -67,16 +66,13 @@ class AlphaBetaAgent(agent.Agent):
 
         # Create the initial tree down to some level
 
-        start = time.time()
-        level = 6
         root = Node(brd, None)
-        self.build_tree(root, level)
+        self.build_tree(root, 5)
 
-        score = alpha_beta(root)
+        move = alpha_beta(root)
 
         print(heuristics.line_map(brd))
-        end = time.time()
-        print(f"score: {score}, time for move: {end-start}")
+        return move
 
         # return score[1]
 
