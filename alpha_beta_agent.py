@@ -36,6 +36,9 @@ class AlphaBetaAgent(agent.Agent):
         if level == 0:
             return node
 
+        if node.board.get_outcome() != 0:
+            return node
+
         children = self.get_successors(node.board)
         for i, c in enumerate(children):
             children[i] = Node(c[0], c[1])
@@ -65,7 +68,7 @@ class AlphaBetaAgent(agent.Agent):
         # Create the initial tree down to some level
 
         start = time.time()
-        level = 5
+        level = 6
         root = Node(brd, None)
         self.build_tree(root, level)
 
