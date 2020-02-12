@@ -67,11 +67,12 @@ class AlphaBetaAgent(agent.Agent):
         # Create the initial tree down to some level
 
         root = Node(brd, None)
-        self.build_tree(root, 5)
-
+        self.build_tree(root, 6)
         move = alpha_beta(root)
 
-        print(heuristics.line_map(brd))
+        for child in root.children:
+            print(f"Move: {child.move}; Score: {child.value}")
+
         return move
 
         # return score[1]

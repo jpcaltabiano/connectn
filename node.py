@@ -16,10 +16,11 @@ class Node(object):
 
 def alpha_beta(node: Node) -> int:
     v = alpha_beta_max(node, -math.inf, math.inf)
+
     for child in node.children:
         if child.value == v:
             return child.move
-    return None
+    return 0
 
 
 def alpha_beta_max(node: Node, alpha: float, beta: float) -> float:
@@ -43,7 +44,7 @@ def alpha_beta_min(node: Node, alpha: float, beta: float) -> float:
     v = math.inf
     for child in node.children:
         child.value = alpha_beta_max(child, alpha, beta)
-        v = max(v, child.value)
+        v = min(v, child.value)
         if v <= alpha:
             return v
         beta = min(beta, v)

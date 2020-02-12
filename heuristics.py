@@ -2,14 +2,34 @@ from board import Board
 
 
 def evaluate_board(board: Board) -> float:
-    return win_loss_evaluate(board)
+    return moves_to_win_evaluate(board)
 
 
 def win_loss_evaluate(board: Board) -> float:
-    if board.get_outcome() == 1:
+    is_won = board.get_outcome()
+    if is_won == 1:
         return -1
-    if board.get_outcome() == 2:
+    if is_won == 2:
         return 1
+    return 0
+
+
+def moves_to_win_evaluate(board: Board) -> float:
+    max_moves = board.w * board.h
+
+    stones = 0
+    for x in range(board.w):
+        for y in range(board.h):
+            if board.board[y][x] == 2:
+                stones += 1
+
+    is_won = board.get_outcome()
+    if is_won == 1:
+        return -(max_moves - stones)
+
+    if is_won == 2:
+        return max_moves - stones
+
     return 0
 
 
