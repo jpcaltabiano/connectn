@@ -1,4 +1,3 @@
-import time
 import agent
 from node import Node
 
@@ -13,30 +12,31 @@ class AlphaBetaAgent(agent.Agent):
     # Class constructor.
     #
     # PARAM [string] name:      the name of this player
-    # PARAM [int]    min_depth: the minimum depth of the tree (ignores time limit)
-    # PARAM [int]    expand_time: the number of seconds to spend expanding the tree
-    def __init__(self, name: str, min_depth: int, expand_time: int):
+    # PARAM [int]    max_depth: the maximum search depth
+    def __init__(self, name, max_depth):
         super().__init__(name)
-        self.min_depth = min_depth
-        self.expand_time = expand_time
+        # Max search depth
+        self.max_depth = max_depth
 
-    # Expands the tree representing possible moves until the stop_time
+    # Expands the tree representing possible moves to max_depth
     #
-    # PARAM [Node]  node: the board at the root node from which to build tree
-    # PARAM [int]   level: the current depth of the tree
-    # PARAM [float] start_time: the time we started building the tree
-    def expand_tree(self, node: Node, level: int = 0, start_time: float = time.time()):
-        if node.board.get_outcome() != 0:
+    # PARAM [Node] node: the board at the root node from which to build tree
+    # PARAM [int]   level: the level to which to build the tree
+    def expand_tree(self, node: Node, level: int = None):
+        if level is None:
+            level = self.max_depth
+
+        if level == 0:
             return
 
-        if level >= self.min_depth and time.time() > start_time + self.expand_time:
+        if node.board.get_outcome() != 0:
             return
 
         for board, move in self.get_successors(node.board):
             node.children.append(Node(board, move))
 
         for child in node.children:
-            self.expand_tree(child, level + 1, start_time)
+            self.expand_tree(child, level - 1)
 
     # Pick a column.
     #

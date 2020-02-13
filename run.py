@@ -5,7 +5,7 @@ import alpha_beta_agent as aba
 import game
 
 # Set random seed for reproducibility
-random.seed()
+random.seed(1)
 
 #
 # Random vs. Random
@@ -32,7 +32,7 @@ g = game.Game(7,  # width
               6,  # height
               4,  # tokens in a row to win
               agent.RandomAgent("random"),  # player 1
-              aba.AlphaBetaAgent("alphabeta", 5, 3))  # player 2
+              aba.AlphaBetaAgent("alphabeta", 5))  # player 2
 
 #
 # Human vs. AlphaBeta
