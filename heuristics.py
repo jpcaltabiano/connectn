@@ -85,7 +85,7 @@ def get_heuristics(board, line_map):
         y = i[0][1]
         # counters for playable spots, self pieces, opponent pieces
         playable, mine, theirs = 0, 0, 0
-        for j in range(self.n):
+        for j in range(board.n):
             x += i[1][0]
             y += i[1][1]
             if board[y][x] == 0 and (y == 0 or y-1 >= 0):
