@@ -55,7 +55,7 @@ class AlphaBetaAgent(agent.Agent):
         move = root.alpha_beta_search()
         # Print the tree for debugging
         # print(root)
-        # Return the move
+        # Return the move        
         return move
 
     # Get the successors of the given board.

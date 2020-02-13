@@ -27,6 +27,7 @@ class Node(object):
     def alpha_beta_max(self, alpha: float, beta: float) -> None:
         if self.is_leaf():
             self.value = evaluate_board(self.board)
+            print('self value', self.value)
 
         self.value = -math.inf
         for child in self.children:
