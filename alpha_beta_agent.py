@@ -1,6 +1,5 @@
 import agent
-import heuristics
-from node import Node, alpha_beta
+from node import Node
 
 
 ###########################
@@ -19,34 +18,25 @@ class AlphaBetaAgent(agent.Agent):
         # Max search depth
         self.max_depth = max_depth
 
-    # Builds the tree representing possible moves to x level
+    # Expands the tree representing possible moves to max_depth
     #
-    # PARAM [Board] board: the board at the root node from which to build tree
+    # PARAM [Node] node: the board at the root node from which to build tree
     # PARAM [int]   level: the level to which to build the tree
-    #   (1 level is 1 player's move)
-    def build_tree(self, node, level):
-
-        # TODO: See if it more efficient to give no children
-        # and stop making tree for node that is an end state
-        #   (would involve checking each board, may add lots of time)
-        # or just give winning states very high heuristics
-        # so they are always chosen regardless of children states
+    def expand_tree(self, node: Node, level: int = None):
+        if level is None:
+            level = self.max_depth
 
         if level == 0:
-            return node
+            return
 
         if node.board.get_outcome() != 0:
-            return node
+            return
 
-        children = self.get_successors(node.board)
-        for i, c in enumerate(children):
-            children[i] = Node(c[0], c[1])
+        for board, move in self.get_successors(node.board):
+            node.children.append(Node(board, move))
 
-        for i in range(len(children)):
-            self.build_tree(children[i], level - 1)
-
-        node.children = children
-        return node
+        for child in node.children:
+            self.expand_tree(child, level - 1)
 
     # Pick a column.
     #
@@ -56,26 +46,17 @@ class AlphaBetaAgent(agent.Agent):
     # NOTE: make sure the column is legal, or you'll lose the game.
     def go(self, brd):
         """Search for the best move (choice of column for the token)"""
-        # Your code here
 
-        # get successors down to x level
-        # at level x, calculate the evaluation of that state
-        #   initial eval func can be 1 if win, -1 if lose, 0 if 
-        #   neither for testing purposes
-        # alpha-beta search the completed tree
-
-        # Create the initial tree down to some level
-
+        # Create a new root node from the current board state
         root = Node(brd, None)
-        self.build_tree(root, 6)
-        move = alpha_beta(root)
-
-        for child in root.children:
-            print(f"Move: {child.move}; Score: {child.value}")
-
+        # Expand out tree
+        self.expand_tree(root)
+        # Run minmax alpha beta search for the next best move
+        move = root.alpha_beta_search()
+        # Print the tree for debugging
+        # print(root)
+        # Return the move
         return move
-
-        # return score[1]
 
     # Get the successors of the given board.
     #

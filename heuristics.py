@@ -20,7 +20,7 @@ def moves_to_win_evaluate(board: Board) -> float:
     stones = 0
     for x in range(board.w):
         for y in range(board.h):
-            if board.board[y][x] == 2:
+            if board.board[y][x] == board.player:
                 stones += 1
 
     is_won = board.get_outcome()
