@@ -3,9 +3,12 @@ import random
 import agent
 import alpha_beta_agent as aba
 import game
+import time
 
 # Set random seed for reproducibility
+# random.seed(time.time())
 random.seed(1)
+
 
 #
 # Random vs. Random

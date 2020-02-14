@@ -11,7 +11,7 @@ class Node(object):
         self.value = None
 
     def is_leaf(self) -> bool:
-        return self.children is None
+        return self.children == []
 
     def alpha_beta_search(self) -> int:
         self.alpha_beta_max(-math.inf, math.inf)
@@ -27,27 +27,28 @@ class Node(object):
     def alpha_beta_max(self, alpha: float, beta: float) -> None:
         if self.is_leaf():
             self.value = evaluate_board(self.board)
-            print('self value', self.value)
 
-        self.value = -math.inf
+        # self.value = -math.inf
+        best_value = -math.inf
         for child in self.children:
             child.alpha_beta_min(alpha, beta)
-            self.value = max(self.value, child.value)
+            self.value = max(best_value, child.value)
             # if self.value >= beta:
             #     return
-            alpha = max(alpha, self.value)
+            alpha = max(alpha, best_value)
 
     def alpha_beta_min(self, alpha: float, beta: float) -> None:
         if self.is_leaf():
             self.value = evaluate_board(self.board)
 
-        self.value = math.inf
+        # self.value = math.inf
+        best_value = math.inf
         for child in self.children:
             child.alpha_beta_max(alpha, beta)
-            self.value = min(self.value, child.value)
+            self.value = min(best_value, child.value)
             # if self.value <= alpha:
             #     return
-            beta = min(beta, self.value)
+            beta = min(beta, best_value)
 
     def __str__(self, level=0):
         ret = "\t" * level + f"Node({repr(self.board.player)}, {repr(self.move)}, {repr(self.value)})" + "\n"

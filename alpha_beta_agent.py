@@ -1,6 +1,6 @@
 import agent
 from node import Node
-
+import heuristics
 
 ###########################
 # Alpha-Beta Search Agent #
@@ -55,7 +55,12 @@ class AlphaBetaAgent(agent.Agent):
         move = root.alpha_beta_search()
         # Print the tree for debugging
         # print(root)
-        # Return the move        
+        # Return the move
+
+        #TODO: always move in middle if all moves equak
+        #       always move into line of n - 1, no search necessary
+        for i in root.children:
+            print(i.move, i.value)
         return move
 
     # Get the successors of the given board.
