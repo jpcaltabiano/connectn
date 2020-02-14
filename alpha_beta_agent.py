@@ -2,6 +2,7 @@ import agent
 from node import Node
 import heuristics
 
+
 ###########################
 # Alpha-Beta Search Agent #
 ###########################
@@ -57,7 +58,7 @@ class AlphaBetaAgent(agent.Agent):
         # print(root)
         # Return the move
 
-        #TODO: always move in middle if all moves equak
+        # TODO: always move in middle if all moves equak
         #       always move into line of n - 1, no search necessary
         for i in root.children:
             print(i.move, i.value)
@@ -87,3 +88,6 @@ class AlphaBetaAgent(agent.Agent):
             # Add board to list of successors
             succ.append((nb, col))
         return succ
+
+
+THE_AGENT = AlphaBetaAgent("Group17", 5)
