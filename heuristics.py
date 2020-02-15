@@ -4,9 +4,7 @@ from board import Board
 def evaluate_board(board: Board) -> float:
     line_map = make_line_map(board)
     h = get_heuristics(board, line_map)
-    # print(h)
     return h
-    # return 0
 
 
 def win_loss_evaluate(board: Board) -> float:
@@ -105,19 +103,5 @@ def get_heuristics(board, line_map):
             benefit_total += line_benefit
 
             score = (benefit_total / num_lines) - (danger_total / num_lines)
-            # score = (benefit_total / num_lines) if danger_total < benefit_total else (danger_total / num_lines)
-            # score = (benefit_total / danger_total) if danger_total else 0
-            # print(score)
             return score
         else: return 0
-
-'''
-Lines with
-    only your pieces are good
-    only their pieces are bad
-    mix of pieces are good but not great
-        better the higher the ratio is in your favor
-    
-    consider the number of winable lines remaining...?
-        score would be lessened at lower levels nomatter what...?
-'''
